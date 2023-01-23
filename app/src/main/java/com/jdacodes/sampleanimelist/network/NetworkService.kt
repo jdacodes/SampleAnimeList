@@ -1,5 +1,6 @@
 package com.jdacodes.sampleanimelist.network
 
+import android.util.Log
 import com.jdacodes.sampleanimelist.BuildConfig
 import com.jdacodes.sampleanimelist.model.Data
 import com.jdacodes.sampleanimelist.model.NetworkResponse
@@ -34,8 +35,15 @@ class NetworkService {
     private val animeService = retrofit.create(AnimeService::class.java)
 
     suspend fun allAnimes(): List<Data> = withContext(Dispatchers.Default) {
-        val result = animeService.getAllAnimes(null).data
-        result
+        var result = animeService.getAllAnimes(null).data
+        if (result != null) {
+            return@withContext result
+        } else {
+            Log.d("NetworkService", "result is empty")
+            result = listOf<Data>()
+            return@withContext result
+        }
+
     }
 }
 
