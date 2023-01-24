@@ -2,7 +2,7 @@ package com.jdacodes.sampleanimelist.ui.animelist
 
 import androidx.lifecycle.*
 import com.jdacodes.sampleanimelist.database.Anime
-import com.jdacodes.sampleanimelist.database.AnimeRepository
+import com.jdacodes.sampleanimelist.ui.animelist.AnimeRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

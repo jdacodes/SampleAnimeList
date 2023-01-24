@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 
-import com.jdacodes.sampleanimelist.database.AnimeRepository
 import com.jdacodes.sampleanimelist.databinding.FragmentAnimeListBinding
 import com.jdacodes.sampleanimelist.utils.Injector
 

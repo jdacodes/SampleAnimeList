@@ -2,7 +2,7 @@ package com.jdacodes.sampleanimelist.utils
 
 import android.content.Context
 import androidx.annotation.VisibleForTesting
-import com.jdacodes.sampleanimelist.database.AnimeRepository
+import com.jdacodes.sampleanimelist.ui.animelist.AnimeRepository
 import com.jdacodes.sampleanimelist.database.AnimeRoomDatabase
 import com.jdacodes.sampleanimelist.network.NetworkService
 import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsRepository
