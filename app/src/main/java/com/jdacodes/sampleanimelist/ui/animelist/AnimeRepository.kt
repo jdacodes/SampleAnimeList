@@ -2,6 +2,8 @@ package com.jdacodes.sampleanimelist.ui.animelist
 
 import com.jdacodes.sampleanimelist.database.Anime
 import com.jdacodes.sampleanimelist.database.AnimeDao
+import com.jdacodes.sampleanimelist.model.NetworkResponse
+import com.jdacodes.sampleanimelist.network.NetworkResult
 import com.jdacodes.sampleanimelist.network.NetworkService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -23,14 +25,28 @@ class AnimeRepository(
     /**
      * Fetch a new list of animes from the network and append them to [animeDao]
      */
-    final suspend fun fetchAnimeList() {
+    final suspend fun fetchAnimeList(): NetworkResult<NetworkResponse> {
 
-        val animes = animeService.allAnimes().map {
-            Anime(
-                title = it.title, imageUrl = it.images.jpg.image_url, animeId = it.mal_id
-            )
+        val animes = animeService.allAnimes()
+//            .map {
+//            Anime(
+//                title = it.title, imageUrl = it.images.jpg.image_url, animeId = it.mal_id
+//            )
+//        }
+//        animeDao.insertAll(animes)
+        return animes
+    }
+
+    final suspend fun insertAnimeList(animes: NetworkResponse) {
+        animes.data?.let {
+            animeDao.insertAll(it.map { anime ->
+                Anime(
+                    title = anime.title,
+                    imageUrl = anime.images.jpg.image_url,
+                    animeId = anime.mal_id
+                )
+            })
         }
-        animeDao.insertAll(animes)
     }
 
     companion object {

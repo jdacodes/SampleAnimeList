@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -34,13 +35,13 @@ class NetworkService {
 
     private val animeService = retrofit.create(AnimeService::class.java)
 
-    suspend fun allAnimes(): List<Data> = withContext(Dispatchers.Default) {
-        var result = animeService.getAllAnimes(null).data
+    suspend fun allAnimes(): NetworkResult<NetworkResponse> = withContext(Dispatchers.Default) {
+        var result = handleApi { animeService.getAllAnimes(null)}
         if (result != null) {
             return@withContext result
         } else {
-            Log.d("NetworkService", "result is empty")
-            result = listOf<Data>()
+            Log.d("NetworkService", "allAnimes: response is null")
+//            result = listOf<Data>()
             return@withContext result
         }
 
@@ -49,6 +50,6 @@ class NetworkService {
 
 interface AnimeService {
     @GET("/v4/seasons/now")
-    suspend fun getAllAnimes(@Query("page") page: Int?): NetworkResponse
+    suspend fun getAllAnimes(@Query("page") page: Int?): Response<NetworkResponse>
 
 }

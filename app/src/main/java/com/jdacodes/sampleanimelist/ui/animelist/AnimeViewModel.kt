@@ -1,14 +1,16 @@
 package com.jdacodes.sampleanimelist.ui.animelist
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.jdacodes.sampleanimelist.database.Anime
-import com.jdacodes.sampleanimelist.ui.animelist.AnimeRepository
+import com.jdacodes.sampleanimelist.network.NetworkResult
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 /**
  * The [ViewModel] for fetching a list of [Anime]s.
  */
+@Suppress("UNCHECKED_CAST")
 class AnimeViewModel internal constructor(
     private val animeRepository: AnimeRepository
 ) : ViewModel() {
@@ -57,8 +59,9 @@ class AnimeViewModel internal constructor(
 
     init {
         launchDataLoad {
-            animeRepository.fetchAnimeList()
+            startDataLoad()
         }
+
     }
 
     /**
@@ -86,9 +89,30 @@ class AnimeViewModel internal constructor(
                 block()
             } catch (error: Throwable) {
                 _snackbar.value = error.message
+                Log.d("AnimeViewModel", "launchDataLoad: error message: ${error.message}")
             } finally {
                 _spinner.value = false
             }
         }
+    }
+
+    private suspend fun startDataLoad() {
+
+        when (val response = animeRepository.fetchAnimeList()) {
+            is NetworkResult.Success -> {
+                animeRepository.insertAnimeList(response.data)
+                Log.d("AnimeViewModel", "startDataLoad:success")
+            }
+            is NetworkResult.Error -> {
+                _snackbar.postValue("${response.code} ${response.message}")
+                Log.d("AnimeViewModel", "startDataLoad: Error ${response.code} ${response.message}")
+            }
+            is NetworkResult.Exception -> {
+                _snackbar.postValue("${response.e.message}")
+                Log.d("AnimeViewModel", "startDataLoad: Exception ${response.e.message}")
+            }
+        }
+
+
     }
 }
