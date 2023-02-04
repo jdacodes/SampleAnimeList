@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.jdacodes.sampleanimelist.database.Anime
 
 import com.jdacodes.sampleanimelist.databinding.FragmentAnimeDetailsBinding
+import com.jdacodes.sampleanimelist.databinding.FragmentAnimeDetailsNewBinding
 import com.jdacodes.sampleanimelist.utils.Injector
 import kotlinx.coroutines.launch
 
@@ -19,7 +20,7 @@ class AnimeDetailsFragment : Fragment() {
 
     private lateinit var anime: Anime
 
-    private var _binding: FragmentAnimeDetailsBinding? = null
+    private var _binding: FragmentAnimeDetailsNewBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: AnimeDetailsViewModel by viewModels {
@@ -37,9 +38,8 @@ class AnimeDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentAnimeDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentAnimeDetailsNewBinding.inflate(inflater, container, false)
         context ?: return binding.root
-
 
         return binding.root
     }
