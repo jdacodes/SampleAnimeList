@@ -49,6 +49,7 @@ class AnimeListFragment : Fragment() {
         })
         binding.animeList.adapter = adapter
         subscribeUi(adapter)
+
         return binding.root
 
     }
