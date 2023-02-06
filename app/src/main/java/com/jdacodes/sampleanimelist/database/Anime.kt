@@ -9,6 +9,7 @@ data class Anime(
     @PrimaryKey @ColumnInfo(name = "title")
     val title: String = "",
     val animeId: Int? = null,
-    val imageUrl: String = ""
+    val imageUrl: String = "",
+    val synopsis: String = ""
 )
 

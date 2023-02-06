@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 /**
  * The Room database for this app
  */
-@Database(entities = [Anime::class], version = 1, exportSchema = false)
+@Database(entities = [Anime::class], version = 2, exportSchema = false)
 abstract class AnimeRoomDatabase : RoomDatabase() {
 
     abstract fun animeDao(): AnimeDao

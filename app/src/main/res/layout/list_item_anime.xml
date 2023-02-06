@@ -49,12 +49,13 @@
                 android:layout_marginBottom="@dimen/margin_normal"
                 android:gravity="center_horizontal"
                 android:text="@{anime.title}"
-                android:textAppearance="?attr/textAppearanceListItem"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/anime_item_image"
-                tools:text="Tomato" />
+                tools:text="Anime"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.jdacodes.sampleanimelist.ui.MaskedCardView>

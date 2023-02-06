@@ -26,14 +26,7 @@ class AnimeRepository(
      * Fetch a new list of animes from the network and append them to [animeDao]
      */
     final suspend fun fetchAnimeList(): NetworkResult<NetworkResponse> {
-
         val animes = animeService.allAnimes()
-//            .map {
-//            Anime(
-//                title = it.title, imageUrl = it.images.jpg.image_url, animeId = it.mal_id
-//            )
-//        }
-//        animeDao.insertAll(animes)
         return animes
     }
 
@@ -43,7 +36,8 @@ class AnimeRepository(
                 Anime(
                     title = anime.title,
                     imageUrl = anime.images.jpg.image_url,
-                    animeId = anime.mal_id
+                    animeId = anime.mal_id,
+                    synopsis = anime.synopsis
                 )
             })
         }
