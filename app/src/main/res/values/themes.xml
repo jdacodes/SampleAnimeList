@@ -30,7 +30,8 @@
 
         <item name="textAppearanceBodyMedium">@style/TextAppearance.App.BodyMedium</item>
         <item name="textAppearanceTitleMedium">@style/TextAppearance.App.TitleMedium</item>
-        <item name="actionBarStyle">@style/Widget.App.CollapsibleToolbar</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
 
     </style>
 </resources>

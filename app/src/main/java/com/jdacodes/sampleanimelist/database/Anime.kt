@@ -10,6 +10,7 @@ data class Anime(
     val title: String = "",
     val animeId: Int? = null,
     val imageUrl: String = "",
-    val synopsis: String = ""
+    val synopsis: String = "",
+
 )
 

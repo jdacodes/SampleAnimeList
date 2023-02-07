@@ -3,6 +3,7 @@ package com.jdacodes.sampleanimelist.ui.animelist
 import android.util.Log
 import androidx.lifecycle.*
 import com.jdacodes.sampleanimelist.database.Anime
+import com.jdacodes.sampleanimelist.database.StudioEntity
 import com.jdacodes.sampleanimelist.network.NetworkResult
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -39,6 +40,8 @@ class AnimeViewModel internal constructor(
      */
 
     val animesUsingFlow: LiveData<List<Anime>> = animeRepository.animeUsingFlow.asLiveData()
+
+    val studiosUsingFlow: LiveData<StudioEntity> = animeRepository.studioUsingFlow.asLiveData()
 
     /**
      * Navigate to AnimeDetails fragment

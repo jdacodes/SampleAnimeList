@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jdacodes.sampleanimelist.database.Anime
+import com.jdacodes.sampleanimelist.database.StudioEntity
 import com.jdacodes.sampleanimelist.databinding.ListItemAnimeBinding
+import com.jdacodes.sampleanimelist.databinding.ListItemAnimeNewBinding
 
 class AnimeAdapter(val clickListener: AnimeItemListener) :
     ListAdapter<Anime, RecyclerView.ViewHolder>(AnimeDiffCallback()) {
@@ -19,14 +21,14 @@ class AnimeAdapter(val clickListener: AnimeItemListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AnimeViewHolder(
-            ListItemAnimeBinding.inflate(
+            ListItemAnimeNewBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
     class AnimeViewHolder(
-        private val binding: ListItemAnimeBinding
+        private val binding: ListItemAnimeNewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Anime, clickListener: AnimeItemListener) {

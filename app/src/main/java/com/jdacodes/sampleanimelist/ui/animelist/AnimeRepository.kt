@@ -2,6 +2,7 @@ package com.jdacodes.sampleanimelist.ui.animelist
 
 import com.jdacodes.sampleanimelist.database.Anime
 import com.jdacodes.sampleanimelist.database.AnimeDao
+import com.jdacodes.sampleanimelist.database.StudioEntity
 import com.jdacodes.sampleanimelist.model.NetworkResponse
 import com.jdacodes.sampleanimelist.network.NetworkResult
 import com.jdacodes.sampleanimelist.network.NetworkService
@@ -22,6 +23,9 @@ class AnimeRepository(
     val animeUsingFlow: Flow<List<Anime>> =
         animeDao.getAnimeList().flowOn(defaultDispatcher).conflate()
 
+    val studioUsingFlow: Flow<StudioEntity> =
+        animeDao.getAnimeStudios()
+
     /**
      * Fetch a new list of animes from the network and append them to [animeDao]
      */
@@ -40,7 +44,16 @@ class AnimeRepository(
                     synopsis = anime.synopsis
                 )
             })
+            animeDao.insertAllStudios(it.map { anime ->
+                StudioEntity(
+                    studioId = anime.studios.first().mal_id,
+                    name = anime.studios.first().name,
+                    type = anime.studios.first().type,
+                    url = anime.studios.first().url
+                )
+            })
         }
+
     }
 
     companion object {

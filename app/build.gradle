@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -47,6 +48,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.9.0'
     //Room components
     implementation 'androidx.room:room-ktx:2.5.0'
+    implementation 'androidx.core:core-ktx:+'
     kapt 'androidx.room:room-compiler:2.5.0'
     androidTestImplementation 'androidx.room:room-testing:2.5.0'
 
