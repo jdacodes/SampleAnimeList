@@ -62,4 +62,7 @@
     <color name="md_theme_dark_surfaceTint">#BDC2FF</color>
     <color name="md_theme_dark_outlineVariant">#46464F</color>
     <color name="md_theme_dark_scrim">#000000</color>
+
+    <color name="app_theme_green">#22B828</color>
+    <color name="app_theme_red">#FA1616</color>
 </resources>

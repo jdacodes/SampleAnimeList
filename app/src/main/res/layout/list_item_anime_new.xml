@@ -79,14 +79,56 @@
                 app:layout_constraintEnd_toEndOf="@id/anime_item_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/anime_item_title"
-                tools:text="Title" />
+                tools:text="Studio" />
+
+            <TextView
+                android:id="@+id/anime_item_popularity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/card_side_margin"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/card_side_margin"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:drawablePadding="@dimen/margin_small"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="1"
+                android:text="@{anime.popularity.toString()}"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/anime_item_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Popularity"
+                app:drawableTint="@color/app_theme_green"
+                app:drawableLeftCompat="@drawable/ic_action_popularity" />
+
+            <TextView
+                android:id="@+id/anime_item_rank"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/card_side_margin"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/card_side_margin"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:drawablePadding="@dimen/margin_small"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="1"
+                android:text="@{anime.rank.toString()}"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/anime_item_image"
+                app:layout_constraintTop_toBottomOf="@id/anime_item_popularity"
+                tools:text="Rank"
+                app:drawableTint="@color/app_theme_red"
+                app:drawableLeftCompat="@drawable/ic_action_rank" />
 
             <TextView
                 android:id="@+id/anime_item_synopsis"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_side_margin"
-                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_small"
                 android:layout_marginEnd="@dimen/card_side_margin"
                 android:layout_marginBottom="@dimen/margin_normal"
                 android:ellipsize="end"
@@ -96,15 +138,33 @@
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/anime_item_image"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/anime_item_rank"
                 tools:text="Synopsis" />
+
+            <TextView
+                android:id="@+id/anime_item_episodes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/card_side_margin"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/card_side_margin"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="1"
+                android:text="@{`Episodes: `+anime.episodes}"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/anime_item_image"
+                app:layout_constraintTop_toBottomOf="@id/anime_item_synopsis"
+                tools:text="Episodes" />
 
             <TextView
                 android:id="@+id/anime_item_genres"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_side_margin"
-                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_small"
                 android:layout_marginEnd="@dimen/card_side_margin"
                 android:layout_marginBottom="@dimen/margin_normal"
                 android:ellipsize="end"
@@ -114,7 +174,7 @@
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/anime_item_image"
-                app:layout_constraintTop_toBottomOf="@id/anime_item_synopsis"
+                app:layout_constraintTop_toBottomOf="@id/anime_item_episodes"
                 tools:text="Genres" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

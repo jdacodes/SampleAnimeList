@@ -14,7 +14,12 @@ data class Anime(
     val imageUrl: String = "",
     val synopsis: String = "",
     val studios: List<Studio>,
-    val genre: List<Genre>
+    val genre: List<Genre>,
+    val rank: Int? = null,
+    val popularity: Int? = null,
+    val episodes: Int? = null
+
+
 
 )
 
