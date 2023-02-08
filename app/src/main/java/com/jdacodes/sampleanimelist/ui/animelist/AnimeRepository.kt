@@ -23,8 +23,8 @@ class AnimeRepository(
     val animeUsingFlow: Flow<List<Anime>> =
         animeDao.getAnimeList().flowOn(defaultDispatcher).conflate()
 
-    val studioUsingFlow: Flow<StudioEntity> =
-        animeDao.getAnimeStudios()
+//    val studiosUsingFlow: Flow<List<String>> =
+//        animeDao.getAnimeStudios()
 
     /**
      * Fetch a new list of animes from the network and append them to [animeDao]
@@ -41,17 +41,19 @@ class AnimeRepository(
                     title = anime.title,
                     imageUrl = anime.images.jpg.image_url,
                     animeId = anime.mal_id,
-                    synopsis = anime.synopsis
+                    synopsis = anime.synopsis,
+                    studios = anime.studios,
+                    genre = anime.genres
                 )
             })
-            animeDao.insertAllStudios(it.map { anime ->
-                StudioEntity(
-                    studioId = anime.studios.first().mal_id,
-                    name = anime.studios.first().name,
-                    type = anime.studios.first().type,
-                    url = anime.studios.first().url
-                )
-            })
+//            animeDao.insertAllStudios(it.map { anime ->
+//                StudioEntity(
+//                    studioId = anime.studios.first().mal_id,
+//                    name = anime.studios.first().name,
+//                    type = anime.studios.first().type,
+//                    url = anime.studios.first().url
+//                )
+//            })
         }
 
     }

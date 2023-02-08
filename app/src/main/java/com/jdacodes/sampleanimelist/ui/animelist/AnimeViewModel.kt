@@ -41,7 +41,7 @@ class AnimeViewModel internal constructor(
 
     val animesUsingFlow: LiveData<List<Anime>> = animeRepository.animeUsingFlow.asLiveData()
 
-    val studiosUsingFlow: LiveData<StudioEntity> = animeRepository.studioUsingFlow.asLiveData()
+//    val studiosUsingFlow: LiveData<List<String>> = animeRepository.studiosUsingFlow.asLiveData()
 
     /**
      * Navigate to AnimeDetails fragment

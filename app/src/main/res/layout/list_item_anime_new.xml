@@ -10,6 +10,10 @@
             type="com.jdacodes.sampleanimelist.database.Anime" />
 
         <variable
+            name="viewModel"
+            type="com.jdacodes.sampleanimelist.ui.animelist.AnimeViewModel" />
+
+        <variable
             name="clickListener"
             type="com.jdacodes.sampleanimelist.ui.animelist.AnimeItemListener" />
     </data>
@@ -47,16 +51,34 @@
                 android:layout_marginTop="@dimen/margin_normal"
                 android:layout_marginStart="@dimen/margin_normal"
                 android:layout_marginEnd="@dimen/margin_normal"
-                android:layout_marginBottom="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_small"
                 android:gravity="center_horizontal"
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:text="@{anime.title}"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/anime_item_studio"
                 app:layout_constraintEnd_toEndOf="@id/anime_item_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/anime_item_image"
+                tools:text="Title" />
+
+            <TextView
+                android:id="@+id/anime_item_studio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:gravity="center_horizontal"
+                android:maxLines="2"
+                android:ellipsize="end"
+                app:studios="@{anime.studios}"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/anime_item_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/anime_item_title"
                 tools:text="Title" />
 
             <TextView
@@ -72,11 +94,28 @@
                 android:maxLines="6"
                 android:text="@{`Synopsis: `+anime.synopsis}"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/anime_item_image"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Synopsis" />
+
+            <TextView
+                android:id="@+id/anime_item_genres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/card_side_margin"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/card_side_margin"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="6"
+                app:genres="@{anime.genre}"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/anime_item_image"
+                app:layout_constraintTop_toBottomOf="@id/anime_item_synopsis"
+                tools:text="Genres" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.jdacodes.sampleanimelist.ui.MaskedCardView>
