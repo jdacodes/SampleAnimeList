@@ -39,6 +39,14 @@ class AnimeRepository(
             animeDao.insertAll(it.map { anime ->
                 Anime(
                     title = anime.title,
+                    titleJapanese = anime.title_japanese,
+                    type = anime.type,
+                    source = anime.source,
+                    status = anime.status,
+                    aired = anime.aired.string,
+                    duration = anime.duration,
+                    rating = anime.rating,
+                    score = anime.score,
                     imageUrl = anime.images.jpg.image_url,
                     animeId = anime.mal_id,
                     synopsis = anime.synopsis,
@@ -46,7 +54,9 @@ class AnimeRepository(
                     genre = anime.genres,
                     popularity = anime.popularity,
                     rank = anime.rank,
-                    episodes = anime.episodes
+                    favorites = anime.favorites,
+                    episodes = anime.episodes,
+                    broadcast = anime.broadcast.string
                 )
             })
 //            animeDao.insertAllStudios(it.map { anime ->

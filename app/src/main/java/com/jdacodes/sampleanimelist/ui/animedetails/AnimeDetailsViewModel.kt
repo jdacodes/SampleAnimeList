@@ -37,6 +37,9 @@ class AnimeDetailsViewModel internal constructor(
     val animeDetailsLiveData: LiveData<Anime>
         get() = _animeDetailsLiveData
 
+    val _animeIdLiveData = MutableLiveData<Int>()
+    val animeIdLiveData: LiveData<Int>
+        get() = _animeIdLiveData
 
     init {
         launchDataLoad {
