@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.jdacodes.sampleanimelist.databinding.FragmentAnimeOverviewBinding
 import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsFragment
 import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsRepository
 import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsViewModel
 import com.jdacodes.sampleanimelist.utils.Injector
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class AnimeOverview : Fragment() {
 
@@ -33,25 +33,35 @@ class AnimeOverview : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAnimeOverviewBinding.inflate(inflater, container, false)
         context ?: return binding.root
-        binding.viewModel = viewModel
-        setupData()
+
+//        setupData()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val animeId = viewModel.animeIdLiveData.value.toString()
-        Log.d("AnimeOverview", animeId)
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Default) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                try {
+                    binding.viewModel = viewModel
+                    val animeId = viewModel.animeIdLiveData.value.toString()
+                    Log.d("AnimeOverview", animeId)
+                } catch (throwable: Throwable) {
+                    Log.d("AnimeOverview", "throwable: " + throwable.message.toString())
+                }
+            }
+        }
+
 
     }
 
     private fun setupData() {
 
-        viewModel._animeDetailsLiveData.observe(viewLifecycleOwner,
-            Observer { anime ->
-                Log.d("AnimeOverview", anime.synopsis)
+//        viewModel._animeDetailsLiveData.observe(viewLifecycleOwner,
+//            Observer { anime ->
+//                Log.d("AnimeOverview", anime.synopsis)
 //            binding.animeItemSynopsis.text = anime.synopsis
-            })
+//            })
     }
 }
 

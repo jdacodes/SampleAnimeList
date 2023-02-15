@@ -15,6 +15,7 @@ import com.jdacodes.sampleanimelist.database.Anime
 
 import com.jdacodes.sampleanimelist.databinding.FragmentAnimeDetailsNewBinding
 import com.jdacodes.sampleanimelist.utils.Injector
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class AnimeDetailsFragment : Fragment() {
@@ -51,31 +52,47 @@ class AnimeDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val animeId = args.animeId
         viewModel._animeIdLiveData.value = animeId
-        Log.d("AnimeDetailsFragment","animeIdLiveData: ${viewModel._animeIdLiveData.value.toString()}")
+        Log.d(
+            "AnimeDetailsFragment",
+            "animeIdLiveData: ${viewModel._animeIdLiveData.value.toString()}"
+        )
         viewLifecycleOwner.lifecycleScope.launch {
+
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.retrieveAnimeDetails(animeId)
-                    .observe(viewLifecycleOwner, Observer { selectedAnime ->
-                        anime = selectedAnime
-                        Log.d("AnimeDetailsFragment","Anime: $anime")
-                        viewModel._animeDetailsLiveData.value = anime
-                        Log.d("AnimeDetailsFragment","AnimeLiveData: ${viewModel.animeDetailsLiveData.value.toString()}")
-                        binding.anime = anime
+                try {
+                    viewModel.retrieveAnimeDetails(animeId)
+                        .observe(viewLifecycleOwner, Observer { selectedAnime ->
+                            anime = selectedAnime
+                            Log.d("AnimeDetailsFragment", "Anime: $anime")
+                            if (anime.synopsis.isNotEmpty()) {
+                                viewModel._animeDetailsLiveData.value = anime
+                                Log.d(
+                                    "AnimeDetailsFragment",
+                                    "AnimeLiveData: " +
+                                            viewModel.animeDetailsLiveData.value.toString()
+                                )
+                                binding.anime = anime
+                            }
+                        })
+                } catch (throwable: Throwable) {
+                    Log.d("AnimeDetailsFragment", "throwable: " + throwable.message.toString())
+                }
 
-
-                    })
             }
+
+
         }
 
     }
+
     private fun setupTabLayout() {
         TabLayoutMediator(
             binding.tabLayout, binding.viewPager
         ) { tab, position ->
-        when(position){
-            0 -> tab.text = getString(R.string.anime_overview_label)
-            1 -> tab.text = getString(R.string.anime_staff_label)
-        }
+            when (position) {
+                0 -> tab.text = getString(R.string.anime_overview_label)
+                1 -> tab.text = getString(R.string.anime_staff_label)
+            }
         }.attach()
     }
 

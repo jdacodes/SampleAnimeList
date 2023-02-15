@@ -1,5 +1,6 @@
 package com.jdacodes.sampleanimelist.ui.animedetails
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.jdacodes.sampleanimelist.database.Anime
 import kotlinx.coroutines.Job
@@ -72,6 +73,7 @@ class AnimeDetailsViewModel internal constructor(
                 block()
             } catch (error: Throwable) {
                 _snackbar.value = error.message
+                Log.d("AnimeDetailsViewModel", "launchDataLoad: error message: ${error.message}")
             } finally {
                 _spinner.value = false
             }
