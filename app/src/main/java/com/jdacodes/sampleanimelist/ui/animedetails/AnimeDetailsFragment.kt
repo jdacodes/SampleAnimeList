@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
 import androidx.navigation.fragment.navArgs
@@ -50,6 +51,8 @@ class AnimeDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewPager.visibility = View.GONE
+        binding.viewPager.offscreenPageLimit = 2
         val animeId = args.animeId
         viewModel._animeIdLiveData.value = animeId
         Log.d(
@@ -64,7 +67,7 @@ class AnimeDetailsFragment : Fragment() {
                         .observe(viewLifecycleOwner, Observer { selectedAnime ->
                             anime = selectedAnime
                             Log.d("AnimeDetailsFragment", "Anime: $anime")
-                            if (anime.synopsis.isNotEmpty()) {
+                            if (anime.synopsis != null) {
                                 viewModel._animeDetailsLiveData.value = anime
                                 Log.d(
                                     "AnimeDetailsFragment",
@@ -72,6 +75,9 @@ class AnimeDetailsFragment : Fragment() {
                                             viewModel.animeDetailsLiveData.value.toString()
                                 )
                                 binding.anime = anime
+                                binding.viewPager.visibility = View.VISIBLE
+                            }else {
+                                binding.viewPager.visibility = View.GONE
                             }
                         })
                 } catch (throwable: Throwable) {

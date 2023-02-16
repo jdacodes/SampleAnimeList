@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.jdacodes.sampleanimelist.database.Anime
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class AnimeDetailsViewModel internal constructor(
@@ -44,7 +45,9 @@ class AnimeDetailsViewModel internal constructor(
 
     init {
         launchDataLoad {
-
+            //workaround for jank in displaying views in viewpager
+            delay(300)
+            _spinner.value = false
         }
     }
 
@@ -79,4 +82,6 @@ class AnimeDetailsViewModel internal constructor(
             }
         }
     }
+
+
 }
