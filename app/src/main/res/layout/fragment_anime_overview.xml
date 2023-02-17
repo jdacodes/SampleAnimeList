@@ -29,12 +29,28 @@
             android:ellipsize="end"
             android:gravity="start"
             android:maxLines="6"
+
             android:text="@{viewModel.animeDetailsLiveData.synopsis}"
+            app:showAlertDialog="@{viewModel.animeDetailsLiveData.synopsis}"
+            app:alertDialogTitle="@{@string/synopsis_label}"
+            app:positiveButtonText="@{@string/ok_label}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Synopsis" />
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/anime_overview_trailer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/card_side_margin"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/card_side_margin"
+        android:layout_marginBottom="@dimen/margin_normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/anime_overview_synopsis"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/anime_overview_type"
@@ -49,7 +65,7 @@
             android:text="@{viewModel.animeDetailsLiveData.type}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/anime_overview_synopsis"
+            app:layout_constraintTop_toBottomOf="@id/anime_overview_trailer"
             tools:text="Type" />
 
         <com.google.android.material.chip.Chip
@@ -65,7 +81,7 @@
             android:text="@{viewModel.animeDetailsLiveData.source}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             app:layout_constraintStart_toEndOf="@id/anime_overview_type"
-            app:layout_constraintTop_toBottomOf="@id/anime_overview_synopsis"
+            app:layout_constraintTop_toBottomOf="@id/anime_overview_trailer"
             tools:text="Source" />
 
         <TextView
@@ -128,7 +144,7 @@
             android:textAppearance="?attr/textAppearanceBodyMedium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/anime_overview_duration"
-            tools:text="Duration" />
+            tools:text="Broadcast" />
 
         <ProgressBar
             android:id="@+id/spinner"
@@ -141,7 +157,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:visibility="gone" />
+             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

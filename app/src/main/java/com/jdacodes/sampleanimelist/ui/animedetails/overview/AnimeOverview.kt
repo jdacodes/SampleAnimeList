@@ -6,14 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.jdacodes.sampleanimelist.R
 import com.jdacodes.sampleanimelist.databinding.FragmentAnimeOverviewBinding
-import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsFragment
 import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsRepository
 import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsViewModel
 import com.jdacodes.sampleanimelist.utils.Injector
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -21,6 +29,7 @@ class AnimeOverview : Fragment() {
 
     private var _binding: FragmentAnimeOverviewBinding? = null
     private val binding get() = _binding!!
+    private lateinit var thirdPartyYouTubePlayerView: YouTubePlayerView
 
     private val viewModel: AnimeDetailsViewModel by viewModels(ownerProducer = { requireParentFragment() }) {
         Injector.provideAnimeDetailsChildViewModelFactory(requireContext())
@@ -48,22 +57,54 @@ class AnimeOverview : Fragment() {
                 viewModel.onSnackbarShown()
             }
         })
-//        setupData()
+
+        thirdPartyYouTubePlayerView = binding.animeOverviewTrailer
+        // We set it to false because we init it manually
+        thirdPartyYouTubePlayerView.enableAutomaticInitialization = false
+
+        val listener: YouTubePlayerListener = object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                // We're using pre-made custom ui
+                val defaultPlayerUiController =
+                    DefaultPlayerUiController(thirdPartyYouTubePlayerView, youTubePlayer)
+                defaultPlayerUiController.showFullscreenButton(true)
+
+                // When the video is in full-screen, cover the entire screen
+                defaultPlayerUiController.setFullScreenButtonClickListener {
+                    if (thirdPartyYouTubePlayerView.isFullScreen()) {
+                        thirdPartyYouTubePlayerView.exitFullScreen()
+//                        Window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+//                        // Show ActionBar
+//                        if (supportActionBar != null) {
+//                            supportActionBar!!.show()
+//                        }
+                    }else {
+                        thirdPartyYouTubePlayerView.enterFullScreen()
+//                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+//                        // Hide ActionBar
+//                        if (supportActionBar != null) {
+//                            supportActionBar!!.hide()
+                        }
+                    }
+                thirdPartyYouTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.rootView)
+                viewModel.animeDetailsLiveData.observe(viewLifecycleOwner, Observer { anime ->
+
+                    //24T6YgLUS9A
+                    val videoId = anime.youtubeId
+                    youTubePlayer.cueVideo(videoId, 0f)
+                })
+
+            }
+        }
+        // Disable iFrame UI
+        val options: IFramePlayerOptions = IFramePlayerOptions.Builder().controls(0).build()
+        thirdPartyYouTubePlayerView.initialize(listener, options)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.animeOverviewType.visibility = View.GONE
-//        viewModel.animeDetailsLiveData.observe(viewLifecycleOwner, Observer { anime ->
-//            if (anime != null) {
-//                binding.animeOverviewSynopsis.visibility = View.VISIBLE
-//                binding.animeOverviewType.visibility = View.VISIBLE
-//            } else {
-//                binding.animeOverviewSynopsis.visibility = View.GONE
-//                binding.animeOverviewType.visibility = View.GONE
-//            }
-//        })
+
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Default) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 try {
@@ -76,19 +117,11 @@ class AnimeOverview : Fragment() {
                 }
             }
         }
-
-
     }
 
-    private fun setupData() {
 
-//        viewModel._animeDetailsLiveData.observe(viewLifecycleOwner,
-//            Observer { anime ->
-//                Log.d("AnimeOverview", anime.synopsis)
-//            binding.animeItemSynopsis.text = anime.synopsis
-//            })
-    }
 }
+
 
 /**
  * Factory for creating a [AnimeDetailsChildViewModel] with a constructor that takes a [AnimeDetailsRepository].

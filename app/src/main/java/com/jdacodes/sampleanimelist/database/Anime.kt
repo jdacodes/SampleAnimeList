@@ -28,7 +28,8 @@ data class Anime(
     val popularity: Int? = null,
     val favorites: Int? = null,
     val broadcast: String = "",
-    val episodes: Int? = null
+    val episodes: Int? = null,
+    val youtubeId: String = ""
 
 
 
