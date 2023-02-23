@@ -1,12 +1,8 @@
-package com.jdacodes.sampleanimelist.ui
+package com.jdacodes.sampleanimelist.utils
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.res.TypedArray
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.StyleRes
 
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -14,9 +10,10 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.jdacodes.sampleanimelist.R
+import com.jdacodes.sampleanimelist.model.Demographic
 import com.jdacodes.sampleanimelist.model.Genre
 import com.jdacodes.sampleanimelist.model.Studio
+import com.jdacodes.sampleanimelist.model.Theme
 
 @BindingAdapter("imageFromUrl")
 fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
@@ -61,7 +58,7 @@ fun showAlertDialog(
     }
 }
 
-@SuppressLint("PrivateResource")
+
 @BindingAdapter("addChips")
 fun ChipGroup.setGenres(genres: List<Genre>?) {
     // Remove any existing chips from the group
@@ -77,6 +74,35 @@ fun ChipGroup.setGenres(genres: List<Genre>?) {
     }
 }
 
+@BindingAdapter("addChipsDemographic")
+fun ChipGroup.setDemographic(demographic: List<Demographic>?) {
+    // Remove any existing chips from the group
+    removeAllViews()
+
+    // Add a chip for each genre in the list
+    demographic?.forEach { demographic ->
+        val chip = Chip(context)
+        chip.text = demographic.name
+
+
+        addView(chip)
+    }
+}
+
+@BindingAdapter("addChipsTheme")
+fun ChipGroup.setThemes(theme: List<Theme>?) {
+    // Remove any existing chips from the group
+    removeAllViews()
+
+    // Add a chip for each genre in the list
+    theme?.forEach { theme ->
+        val chip = Chip(context)
+        chip.text = theme.name
+
+
+        addView(chip)
+    }
+}
 //@BindingAdapter("isGone")
 //fun bindIsGone(view: FloatingActionButton, isGone: Boolean?) {
 //    if (isGone == null || isGone) {

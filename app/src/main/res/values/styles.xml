@@ -78,6 +78,8 @@
 
     <style name="Widget.App.Chip" parent="Widget.Material3.Chip.Assist">
         <item name="android:textAppearance">@style/TextAppearance.App.BodyMedium.Chip</item>
+        <item name="chipSpacingHorizontal">4dp</item>
+        <item name="chipSpacingVertical">0dp</item>
     </style>
 
     <style name="TextAppearance.App.BodyMedium.Chip" parent="TextAppearance.Material3.BodyMedium">

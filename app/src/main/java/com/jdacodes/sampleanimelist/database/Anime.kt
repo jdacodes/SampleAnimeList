@@ -3,9 +3,7 @@ package com.jdacodes.sampleanimelist.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.jdacodes.sampleanimelist.model.Broadcast
-import com.jdacodes.sampleanimelist.model.Genre
-import com.jdacodes.sampleanimelist.model.Studio
+import com.jdacodes.sampleanimelist.model.*
 
 @Entity(tableName = "anime_table")
 data class Anime(
@@ -29,9 +27,11 @@ data class Anime(
     val favorites: Int? = null,
     val broadcast: String = "",
     val episodes: Int? = null,
-    val youtubeId: String = ""
+    val youtubeId: String = "",
+    val demographics: List<Demographic>,
+    val themes: List<Theme>
 
 
 
-)
+    )
 

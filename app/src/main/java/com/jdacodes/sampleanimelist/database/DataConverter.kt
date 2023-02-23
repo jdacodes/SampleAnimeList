@@ -3,9 +3,7 @@ package com.jdacodes.sampleanimelist.database
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.jdacodes.sampleanimelist.model.Broadcast
-import com.jdacodes.sampleanimelist.model.Genre
-import com.jdacodes.sampleanimelist.model.Studio
+import com.jdacodes.sampleanimelist.model.*
 
 class DataConverter {
     @TypeConverter
@@ -33,6 +31,35 @@ class DataConverter {
     fun toAnimeGenresList(value: String): List<Genre> {
         val gson = Gson()
         val type = object : TypeToken<List<Genre>>() {}.type
+        return gson.fromJson(value, type)
+    }
+
+
+    @TypeConverter
+    fun fromAnimeDemographicsList(value: List<Demographic>): String {
+        val gson = Gson()
+        val type = object : TypeToken<List<Demographic>>() {}.type
+        return gson.toJson(value, type)
+    }
+
+    @TypeConverter
+    fun toAnimeDemographicsList(value: String): List<Demographic> {
+        val gson = Gson()
+        val type = object : TypeToken<List<Demographic>>() {}.type
+        return gson.fromJson(value, type)
+    }
+
+    @TypeConverter
+    fun fromAnimeThemeList(value: List<Theme>): String {
+        val gson = Gson()
+        val type = object : TypeToken<List<Theme>>() {}.type
+        return gson.toJson(value, type)
+    }
+
+    @TypeConverter
+    fun toAnimeThemeList(value: String): List<Theme> {
+        val gson = Gson()
+        val type = object : TypeToken<List<Theme>>() {}.type
         return gson.fromJson(value, type)
     }
 

@@ -57,7 +57,9 @@ class AnimeRepository(
                     favorites = anime.favorites,
                     episodes = anime.episodes,
                     broadcast = anime.broadcast.string,
-                    youtubeId = anime.trailer.youtube_id
+                    youtubeId = anime.trailer.youtube_id,
+                    demographics = anime.demographics,
+                    themes = anime.themes
                 )
             })
 //            animeDao.insertAllStudios(it.map { anime ->

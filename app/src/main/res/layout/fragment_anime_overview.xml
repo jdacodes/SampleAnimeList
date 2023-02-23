@@ -157,9 +157,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/card_side_margin"
-            android:layout_marginTop="@dimen/margin_small"
             android:layout_marginEnd="@dimen/card_side_margin"
-            android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="start"
             android:maxLines="2"
             android:visibility="@{viewModel.animeDetailsLiveData.genre == null ? View.GONE : View.VISIBLE}"
@@ -168,6 +166,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/anime_overview_broadcast"
             tools:text="Genres" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/anime_overview_themes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_side_margin"
+            android:layout_marginEnd="@dimen/card_side_margin"
+            android:gravity="start"
+            android:maxLines="2"
+            android:visibility="@{viewModel.animeDetailsLiveData.themes == null ? View.GONE : View.VISIBLE}"
+            app:addChipsTheme="@{viewModel.animeDetailsLiveData.themes}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/anime_overview_genres"
+            tools:text="Themes" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/anime_overview_demographic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_side_margin"
+            android:layout_marginEnd="@dimen/card_side_margin"
+            android:gravity="start"
+            android:maxLines="2"
+            android:visibility="@{viewModel.animeDetailsLiveData.demographics == null ? View.GONE : View.VISIBLE}"
+            app:addChipsDemographic="@{viewModel.animeDetailsLiveData.demographics}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/anime_overview_themes"
+            tools:text="Demographics" />
 
         <ProgressBar
             android:id="@+id/spinner"

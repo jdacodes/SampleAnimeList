@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
 /**
  * The Room database for this app
  */
-@Database(entities = [Anime::class,StudioEntity::class], version = 8, exportSchema = false)
+@Database(entities = [Anime::class,StudioEntity::class], version = 9, exportSchema = false)
 @TypeConverters(DataConverter::class)
 abstract class AnimeRoomDatabase : RoomDatabase() {
 
