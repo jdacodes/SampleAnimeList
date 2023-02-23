@@ -51,7 +51,6 @@ class AnimeDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewPager.visibility = View.GONE
         binding.viewPager.offscreenPageLimit = 2
         val animeId = args.animeId
         viewModel._animeIdLiveData.value = animeId
@@ -64,21 +63,16 @@ class AnimeDetailsFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 try {
                     viewModel.retrieveAnimeDetails(animeId)
-                        .observe(viewLifecycleOwner, Observer { selectedAnime ->
+                        .observe( viewLifecycleOwner,Observer { selectedAnime ->
                             anime = selectedAnime
                             Log.d("AnimeDetailsFragment", "Anime: $anime")
-                            if (anime.synopsis != null) {
-                                viewModel._animeDetailsLiveData.value = anime
-                                Log.d(
-                                    "AnimeDetailsFragment",
-                                    "AnimeLiveData: " +
-                                            viewModel.animeDetailsLiveData.value.toString()
-                                )
-                                binding.anime = anime
-                                binding.viewPager.visibility = View.VISIBLE
-                            }else {
-                                binding.viewPager.visibility = View.GONE
-                            }
+                            viewModel._animeDetailsLiveData.value = anime
+                            Log.d(
+                                "AnimeDetailsFragment",
+                                "AnimeLiveData: " +
+                                        viewModel.animeDetailsLiveData.value.toString()
+                            )
+                            binding.anime = anime
                         })
                 } catch (throwable: Throwable) {
                     Log.d("AnimeDetailsFragment", "throwable: " + throwable.message.toString())

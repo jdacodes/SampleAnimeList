@@ -30,6 +30,7 @@
 
         <item name="textAppearanceBodyMedium">@style/TextAppearance.App.BodyMedium</item>
         <item name="textAppearanceTitleMedium">@style/TextAppearance.App.TitleMedium</item>
+        <item name="chipStyle">@style/Widget.App.Chip</item>
         <item name="android:windowTranslucentStatus">true</item>
 
     </style>

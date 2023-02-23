@@ -9,7 +9,7 @@
             name="viewModel"
             type="com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsViewModel" />
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
     </data>
 
@@ -29,28 +29,28 @@
             android:ellipsize="end"
             android:gravity="start"
             android:maxLines="6"
-
             android:text="@{viewModel.animeDetailsLiveData.synopsis}"
-            app:showAlertDialog="@{viewModel.animeDetailsLiveData.synopsis}"
-            app:alertDialogTitle="@{@string/synopsis_label}"
-            app:positiveButtonText="@{@string/ok_label}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:visibility="@{viewModel.animeDetailsLiveData.synopsis == null ? View.GONE : View.VISIBLE}"
+            app:alertDialogTitle="@{@string/synopsis_label}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:positiveButtonText="@{@string/ok_label}"
+            app:showAlertDialog="@{viewModel.animeDetailsLiveData.synopsis}"
             tools:text="Synopsis" />
 
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:id="@+id/anime_overview_trailer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/card_side_margin"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginEnd="@dimen/card_side_margin"
-        android:layout_marginBottom="@dimen/margin_normal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/anime_overview_synopsis"/>
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/anime_overview_trailer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_side_margin"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/card_side_margin"
+            android:layout_marginBottom="@dimen/margin_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/anime_overview_synopsis" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/anime_overview_type"
@@ -64,6 +64,7 @@
             android:maxLines="1"
             android:text="@{viewModel.animeDetailsLiveData.type}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:visibility="@{viewModel.animeDetailsLiveData.type == null ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/anime_overview_trailer"
             tools:text="Type" />
@@ -80,6 +81,7 @@
             android:maxLines="1"
             android:text="@{viewModel.animeDetailsLiveData.source}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:visibility="@{viewModel.animeDetailsLiveData.source == null ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@id/anime_overview_type"
             app:layout_constraintTop_toBottomOf="@id/anime_overview_trailer"
             tools:text="Source" />
@@ -96,6 +98,7 @@
             android:maxLines="1"
             android:text="@{`Airing: `+ viewModel.animeDetailsLiveData.aired}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:visibility="@{viewModel.animeDetailsLiveData.aired == null ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@id/anime_overview_synopsis"
             app:layout_constraintTop_toBottomOf="@id/anime_overview_type"
             tools:text="Airing" />
@@ -110,6 +113,7 @@
             android:maxLines="1"
             android:text="@{`Episodes: `+ viewModel.animeDetailsLiveData.episodes}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:visibility="@{viewModel.animeDetailsLiveData.episodes == null ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/anime_overview_aired"
             tools:text="Episodes" />
@@ -126,6 +130,7 @@
             android:maxLines="1"
             android:text="@{`Duration: `+ viewModel.animeDetailsLiveData.duration}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:visibility="@{viewModel.animeDetailsLiveData.duration == null ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/anime_overview_episodes"
             tools:text="Duration" />
@@ -142,9 +147,27 @@
             android:maxLines="1"
             android:text="@{`Broadcast: `+ viewModel.animeDetailsLiveData.broadcast}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:visibility="@{viewModel.animeDetailsLiveData.broadcast == null ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/anime_overview_duration"
             tools:text="Broadcast" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/anime_overview_genres"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_side_margin"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/card_side_margin"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:gravity="start"
+            android:maxLines="2"
+            android:visibility="@{viewModel.animeDetailsLiveData.genre == null ? View.GONE : View.VISIBLE}"
+            app:addChips="@{viewModel.animeDetailsLiveData.genre}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/anime_overview_broadcast"
+            tools:text="Genres" />
 
         <ProgressBar
             android:id="@+id/spinner"
@@ -153,11 +176,10 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-             />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

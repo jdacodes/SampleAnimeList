@@ -47,7 +47,7 @@ class AnimeOverview : Fragment() {
         //show spinner when [spinner] is true
         viewModel.spinner.observe(viewLifecycleOwner, Observer { show ->
             binding.spinner.visibility = if (show) View.VISIBLE else View.GONE
-            binding.parentContainer.visibility = if (show) View.INVISIBLE else View.VISIBLE
+            binding.parentContainer.visibility = if (show) View.GONE else View.VISIBLE
         })
 
         // Show a snackbar whenever the [snackbar] is updated a non-null value
@@ -62,43 +62,7 @@ class AnimeOverview : Fragment() {
         // We set it to false because we init it manually
         thirdPartyYouTubePlayerView.enableAutomaticInitialization = false
 
-        val listener: YouTubePlayerListener = object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                // We're using pre-made custom ui
-                val defaultPlayerUiController =
-                    DefaultPlayerUiController(thirdPartyYouTubePlayerView, youTubePlayer)
-                defaultPlayerUiController.showFullscreenButton(true)
 
-                // When the video is in full-screen, cover the entire screen
-                defaultPlayerUiController.setFullScreenButtonClickListener {
-                    if (thirdPartyYouTubePlayerView.isFullScreen()) {
-                        thirdPartyYouTubePlayerView.exitFullScreen()
-//                        Window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
-//                        // Show ActionBar
-//                        if (supportActionBar != null) {
-//                            supportActionBar!!.show()
-//                        }
-                    }else {
-                        thirdPartyYouTubePlayerView.enterFullScreen()
-//                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-//                        // Hide ActionBar
-//                        if (supportActionBar != null) {
-//                            supportActionBar!!.hide()
-                        }
-                    }
-                thirdPartyYouTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.rootView)
-                viewModel.animeDetailsLiveData.observe(viewLifecycleOwner, Observer { anime ->
-
-                    //24T6YgLUS9A
-                    val videoId = anime.youtubeId
-                    youTubePlayer.cueVideo(videoId, 0f)
-                })
-
-            }
-        }
-        // Disable iFrame UI
-        val options: IFramePlayerOptions = IFramePlayerOptions.Builder().controls(0).build()
-        thirdPartyYouTubePlayerView.initialize(listener, options)
         return binding.root
     }
 
@@ -111,6 +75,43 @@ class AnimeOverview : Fragment() {
                     binding.viewModel = viewModel
                     val animeId = viewModel.animeIdLiveData.value.toString()
                     Log.d("AnimeOverview", animeId)
+
+                    val listener: YouTubePlayerListener = object : AbstractYouTubePlayerListener() {
+                        override fun onReady(youTubePlayer: YouTubePlayer) {
+                            // We're using pre-made custom ui
+                            val defaultPlayerUiController =
+                                DefaultPlayerUiController(thirdPartyYouTubePlayerView, youTubePlayer)
+                            defaultPlayerUiController.showFullscreenButton(true)
+
+                            // When the video is in full-screen, cover the entire screen
+                            defaultPlayerUiController.setFullScreenButtonClickListener {
+                                if (thirdPartyYouTubePlayerView.isFullScreen()) {
+                                    thirdPartyYouTubePlayerView.exitFullScreen()
+//                        Window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+//                        // Show ActionBar
+//                        if (supportActionBar != null) {
+//                            supportActionBar!!.show()
+//                        }
+                                }else {
+                                    thirdPartyYouTubePlayerView.enterFullScreen()
+//                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+//                        // Hide ActionBar
+//                        if (supportActionBar != null) {
+//                            supportActionBar!!.hide()
+                                }
+                            }
+                            thirdPartyYouTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.rootView)
+                            viewModel.animeDetailsLiveData.observeForever(Observer { anime ->
+
+                                //24T6YgLUS9A
+                                val videoId = anime.youtubeId
+                                youTubePlayer.cueVideo(videoId, 0f)
+                            })
+                        }
+                    }
+                    // Disable iFrame UI
+                    val options: IFramePlayerOptions = IFramePlayerOptions.Builder().controls(0).build()
+                    thirdPartyYouTubePlayerView.initialize(listener, options)
 
                 } catch (throwable: Throwable) {
                     Log.d("AnimeOverview", "throwable: " + throwable.message.toString())
