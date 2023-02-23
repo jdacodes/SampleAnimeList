@@ -28,7 +28,7 @@
             android:layout_marginBottom="@dimen/margin_normal"
             android:ellipsize="end"
             android:gravity="start"
-            android:maxLines="6"
+            android:maxLines="4"
             android:text="@{viewModel.animeDetailsLiveData.synopsis}"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             android:visibility="@{viewModel.animeDetailsLiveData.synopsis == null ? View.GONE : View.VISIBLE}"

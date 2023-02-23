@@ -18,13 +18,15 @@
         android:fitsSystemWindows="true"
         tools:context=".ui.animedetails.AnimeDetailsFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <com.jdacodes.sampleanimelist.utils.CustomAppBarLayout
             android:id="@+id/appbar"
+            android:fitsSystemWindows="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar_layout"
+                android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
                 android:theme="@style/Widget.App.CollapsingToolbar"
@@ -77,11 +79,14 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:tabMode="scrollable"
+                app:layout_anchor="@id/appbar"
+                app:layout_anchorGravity="bottom"
                 android:visibility="@{anime == null ? View.GONE : View.VISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </com.google.android.material.appbar.AppBarLayout>
+        </com.jdacodes.sampleanimelist.utils.CustomAppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
@@ -95,6 +100,7 @@
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                 android:visibility="@{anime == null ? View.GONE : View.VISIBLE}">
 
             </androidx.viewpager2.widget.ViewPager2>
