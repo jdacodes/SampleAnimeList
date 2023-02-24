@@ -80,7 +80,10 @@ class AnimeOverview : Fragment() {
                         override fun onReady(youTubePlayer: YouTubePlayer) {
                             // We're using pre-made custom ui
                             val defaultPlayerUiController =
-                                DefaultPlayerUiController(thirdPartyYouTubePlayerView, youTubePlayer)
+                                DefaultPlayerUiController(
+                                    thirdPartyYouTubePlayerView,
+                                    youTubePlayer
+                                )
                             defaultPlayerUiController.showFullscreenButton(true)
 
                             // When the video is in full-screen, cover the entire screen
@@ -92,7 +95,7 @@ class AnimeOverview : Fragment() {
 //                        if (supportActionBar != null) {
 //                            supportActionBar!!.show()
 //                        }
-                                }else {
+                                } else {
                                     thirdPartyYouTubePlayerView.enterFullScreen()
 //                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 //                        // Hide ActionBar
@@ -110,7 +113,8 @@ class AnimeOverview : Fragment() {
                         }
                     }
                     // Disable iFrame UI
-                    val options: IFramePlayerOptions = IFramePlayerOptions.Builder().controls(0).build()
+                    val options: IFramePlayerOptions =
+                        IFramePlayerOptions.Builder().controls(0).build()
                     thirdPartyYouTubePlayerView.initialize(listener, options)
 
                 } catch (throwable: Throwable) {
@@ -120,6 +124,10 @@ class AnimeOverview : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }
 

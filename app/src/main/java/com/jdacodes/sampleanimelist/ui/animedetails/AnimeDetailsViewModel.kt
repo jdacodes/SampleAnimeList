@@ -46,7 +46,7 @@ class AnimeDetailsViewModel internal constructor(
     init {
         launchDataLoad {
             //workaround for loading jank in displaying views in viewpager
-            delay(600)
+            delay(200)
         }
     }
 

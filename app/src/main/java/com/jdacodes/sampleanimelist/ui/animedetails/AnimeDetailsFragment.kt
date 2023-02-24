@@ -32,10 +32,6 @@ class AnimeDetailsFragment : Fragment() {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,26 +40,27 @@ class AnimeDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAnimeDetailsNewBinding.inflate(inflater, container, false)
         context ?: return binding.root
-        setupViewPager()
-        setupTabLayout()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewPager.offscreenPageLimit = 3
-        val animeId = args.animeId
-        viewModel._animeIdLiveData.value = animeId
-        Log.d(
-            "AnimeDetailsFragment",
-            "animeIdLiveData: ${viewModel._animeIdLiveData.value.toString()}"
-        )
-        viewLifecycleOwner.lifecycleScope.launch {
 
+        viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 try {
+                    binding.viewPager.offscreenPageLimit = 3
+                    val animeId = args.animeId
+                    viewModel._animeIdLiveData.value = animeId
+                    Log.d(
+                        "AnimeDetailsFragment",
+                        "animeIdLiveData: ${viewModel._animeIdLiveData.value.toString()}"
+                    )
+                    setupViewPager()
+                    setupTabLayout()
                     viewModel.retrieveAnimeDetails(animeId)
-                        .observe( viewLifecycleOwner,Observer { selectedAnime ->
+                        .observe(viewLifecycleOwner, Observer { selectedAnime ->
                             anime = selectedAnime
                             Log.d("AnimeDetailsFragment", "Anime: $anime")
                             viewModel._animeDetailsLiveData.value = anime
@@ -77,12 +74,8 @@ class AnimeDetailsFragment : Fragment() {
                 } catch (throwable: Throwable) {
                     Log.d("AnimeDetailsFragment", "throwable: " + throwable.message.toString())
                 }
-
             }
-
-
         }
-
     }
 
     private fun setupTabLayout() {
@@ -99,6 +92,11 @@ class AnimeDetailsFragment : Fragment() {
     private fun setupViewPager() {
         val adapter = AnimeDetailsAdapter(this@AnimeDetailsFragment, 2)
         binding.viewPager.adapter = adapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
