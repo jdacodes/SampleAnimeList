@@ -26,8 +26,8 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
 }
 
 @BindingAdapter("studios")
-fun setStudios(textView: TextView, items: List<Studio>) {
-    textView.text = items.joinToString { it.name.toString() }
+fun setStudios(textView: TextView, items: List<Studio>?) {
+    textView.text = items?.joinToString { it.name.toString() } ?: ""
 }
 
 @BindingAdapter("genres")

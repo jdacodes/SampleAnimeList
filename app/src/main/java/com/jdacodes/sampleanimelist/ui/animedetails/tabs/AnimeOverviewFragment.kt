@@ -1,4 +1,4 @@
-package com.jdacodes.sampleanimelist.ui.animedetails.overview
+package com.jdacodes.sampleanimelist.ui.animedetails.tabs
 
 import android.os.Bundle
 import android.util.Log
@@ -6,12 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.jdacodes.sampleanimelist.R
 import com.jdacodes.sampleanimelist.databinding.FragmentAnimeOverviewBinding
 import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsRepository
 import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsViewModel

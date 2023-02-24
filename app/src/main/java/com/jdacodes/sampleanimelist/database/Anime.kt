@@ -24,10 +24,13 @@ data class Anime(
     val genre: List<Genre>,
     val rank: Int? = null,
     val popularity: Int? = null,
+    val members: Int? = null,
     val favorites: Int? = null,
     val broadcast: String = "",
     val episodes: Int? = null,
+    val year: Int? = null,
     val youtubeId: String = "",
+    val season: String = "",
     val demographics: List<Demographic>,
     val themes: List<Theme>
 

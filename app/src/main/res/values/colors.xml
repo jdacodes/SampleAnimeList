@@ -65,4 +65,5 @@
 
     <color name="app_theme_green">#22B828</color>
     <color name="app_theme_red">#FA1616</color>
+    <color name="app_theme_yellow">#FAD016</color>
 </resources>

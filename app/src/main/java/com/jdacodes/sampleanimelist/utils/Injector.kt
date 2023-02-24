@@ -7,7 +7,7 @@ import com.jdacodes.sampleanimelist.database.AnimeRoomDatabase
 import com.jdacodes.sampleanimelist.network.NetworkService
 import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsRepository
 import com.jdacodes.sampleanimelist.ui.animedetails.AnimeDetailsViewModelFactory
-import com.jdacodes.sampleanimelist.ui.animedetails.overview.AnimeDetailsChildViewModelFactory
+import com.jdacodes.sampleanimelist.ui.animedetails.tabs.AnimeDetailsChildViewModelFactory
 import com.jdacodes.sampleanimelist.ui.animelist.AnimeListViewModelFactory
 
 interface ViewModelFactoryProvider {

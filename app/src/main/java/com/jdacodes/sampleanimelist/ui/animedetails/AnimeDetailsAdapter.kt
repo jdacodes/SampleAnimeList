@@ -1,9 +1,9 @@
 package com.jdacodes.sampleanimelist.ui.animedetails
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.jdacodes.sampleanimelist.ui.animedetails.overview.AnimeOverview
+import com.jdacodes.sampleanimelist.ui.animedetails.tabs.AnimeOverview
+import com.jdacodes.sampleanimelist.ui.animedetails.tabs.AnimeStaffFragment
 
 class AnimeDetailsAdapter(
     fragment: Fragment,
@@ -17,7 +17,7 @@ class AnimeDetailsAdapter(
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> AnimeOverview()
-            1 -> AnimeOverview()
+            1 -> AnimeStaffFragment()
             else -> AnimeOverview()
         }
     }

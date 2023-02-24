@@ -59,7 +59,10 @@ class AnimeRepository(
                     broadcast = anime.broadcast.string,
                     youtubeId = anime.trailer.youtube_id,
                     demographics = anime.demographics,
-                    themes = anime.themes
+                    themes = anime.themes,
+                    members = anime.members,
+                    season = anime.season,
+                    year = anime.year
                 )
             })
 //            animeDao.insertAllStudios(it.map { anime ->
