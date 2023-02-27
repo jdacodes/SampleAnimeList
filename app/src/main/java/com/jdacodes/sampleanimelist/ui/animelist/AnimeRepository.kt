@@ -62,7 +62,10 @@ class AnimeRepository(
                     themes = anime.themes,
                     members = anime.members,
                     season = anime.season,
-                    year = anime.year
+                    year = anime.year,
+                    url = anime.url,
+                    licensors = anime.licensors,
+                    producers = anime.producers
                 )
             })
 //            animeDao.insertAllStudios(it.map { anime ->

@@ -8,4 +8,8 @@
     <string name="anime_staff_label">Staff</string>
     <string name="synopsis_label">Synopsis</string>
     <string name="ok_label">OK</string>
+    <string name="studios_label">Studios:</string>
+    <string name="label_producers">Producers:</string>
+    <string name="label_licensors">Licensors:</string>
+    <string name="label_url">"URL: "</string>
 </resources>

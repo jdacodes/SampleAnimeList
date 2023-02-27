@@ -10,10 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.jdacodes.sampleanimelist.model.Demographic
-import com.jdacodes.sampleanimelist.model.Genre
-import com.jdacodes.sampleanimelist.model.Studio
-import com.jdacodes.sampleanimelist.model.Theme
+import com.jdacodes.sampleanimelist.model.*
 
 @BindingAdapter("imageFromUrl")
 fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
@@ -27,6 +24,16 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
 
 @BindingAdapter("studios")
 fun setStudios(textView: TextView, items: List<Studio>?) {
+    textView.text = items?.joinToString { it.name.toString() } ?: ""
+}
+
+@BindingAdapter("producers")
+fun setProducers(textView: TextView, items: List<Producer>?) {
+    textView.text = items?.joinToString { it.name.toString() } ?: ""
+}
+
+@BindingAdapter("licensors")
+fun setLicensors(textView: TextView, items: List<Licensor>?) {
     textView.text = items?.joinToString { it.name.toString() } ?: ""
 }
 

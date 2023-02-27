@@ -22,6 +22,8 @@ data class Anime(
     val synopsis: String = "",
     val studios: List<Studio>,
     val genre: List<Genre>,
+    val producers: List<Producer>,
+    val licensors: List<Licensor>,
     val rank: Int? = null,
     val popularity: Int? = null,
     val members: Int? = null,
@@ -31,6 +33,7 @@ data class Anime(
     val year: Int? = null,
     val youtubeId: String = "",
     val season: String = "",
+    val url: String = "",
     val demographics: List<Demographic>,
     val themes: List<Theme>
 

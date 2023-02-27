@@ -63,17 +63,31 @@ class DataConverter {
         return gson.fromJson(value, type)
     }
 
-//    @TypeConverter
-//    fun fromAnimeBroadcast(value: Broadcast): String {
-//        val gson = Gson()
-//        val type = object : TypeToken<Broadcast>() {}.type
-//        return gson.toJson(value, type)
-//    }
-//
-//    @TypeConverter
-//    fun toAnimeBroadcast(value: String): Broadcast {
-//        val gson = Gson()
-//        val type = object : TypeToken<Broadcast>() {}.type
-//        return gson.fromJson(value, type)
-//    }
+    @TypeConverter
+    fun fromAnimeProducerList(value: List<Producer>): String {
+        val gson = Gson()
+        val type = object : TypeToken<List<Producer>>() {}.type
+        return gson.toJson(value, type)
+    }
+
+    @TypeConverter
+    fun toAnimeProducerList(value: String): List<Producer> {
+        val gson = Gson()
+        val type = object : TypeToken<List<Producer>>() {}.type
+        return gson.fromJson(value, type)
+    }
+
+    @TypeConverter
+    fun fromAnimeLicensorList(value: List<Licensor>): String {
+        val gson = Gson()
+        val type = object : TypeToken<List<Licensor>>() {}.type
+        return gson.toJson(value, type)
+    }
+
+    @TypeConverter
+    fun toAnimeLicensorList(value: String): List<Licensor> {
+        val gson = Gson()
+        val type = object : TypeToken<List<Licensor>>() {}.type
+        return gson.fromJson(value, type)
+    }
 }
